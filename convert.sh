@@ -1,10 +1,13 @@
 ### Setup information
-# Set to input file extension
+# Set 'in_ext' to input file extension
+# Set 'in_dir' to input folder
+# Set 'out_dir' to output folder
 in_ext=".MTS"
-# Set to input folder
 in_dir=~/convert/in
-# Set to output folder
 out_dir=~/convert/out
+
+### Installs ffmpeg
+sudo apt install ffmpeg
 
 ### Gets all files in the input directory
 filelist=$(ls $in_dir)
@@ -12,7 +15,17 @@ filelist=$(ls $in_dir)
 ### Start file counter at 1
 var=1
 
-### Run for each file in input folder
+### Purge output directory
+echo "\n\n======================="
+echo "Purging output directory:"
+echo "======================="
+rm -r $out_dir
+mkdir $out_dir
+
+### Convert the files!
+echo "\n\n======================="
+echo "Converting files:"
+echo "======================="
 for filename in $filelist; do
 
     ### Parses the filename to establish an input file and an output file
@@ -21,10 +34,10 @@ for filename in $filelist; do
     out_full_path="$out_dir/$name_noext.mp4"
 
     ### Prints file info
+    echo ""
     echo "$var: $filename"
     echo "    $in_full_path"
     echo "    $out_full_path"
-    echo ""
 
     ### Increment file counter
     var=$((var + 1))
@@ -37,3 +50,7 @@ for filename in $filelist; do
     touch $out_full_path -a -m -t $metadate
 
 done
+
+echo "\n\n======================="
+echo "Done converting!"
+echo "======================="
