@@ -12,9 +12,6 @@ sudo apt install ffmpeg
 ### Gets all files in the input directory
 filelist=$(ls $in_dir)
 
-### Start file counter at 1
-var=1
-
 ### Purge output directory
 echo "\n\n======================="
 echo "Purging output directory:"
@@ -26,6 +23,9 @@ mkdir $out_dir
 echo "\n\n======================="
 echo "Converting files:"
 echo "======================="
+
+### Start file counter at 1
+var=1
 for filename in $filelist; do
 
     ### Parses the filename to establish an input file and an output file
